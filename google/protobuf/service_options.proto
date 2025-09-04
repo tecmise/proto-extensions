@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package google.api;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "google.golang.org/protobuf/types/known/serviceoptionspb";
+
+option java_multiple_files = true;
+option java_outer_classname = "AnnotationsProto";
+option java_package = "com.google.api";
+option objc_class_prefix = "GAPI";
+
+extend google.protobuf.ServiceOptions {
+  optional LambdaIntegration lambda_integration = 40001;
+  optional RestIntegration rest_integration = 40002;
+  optional SqsIntegration sqs_integration = 40003;
+}
+
+message LambdaIntegration {
+  string function_name = 1;
+}
+
+message RestIntegration {
+  string path = 1;
+}
+
+message SqsIntegration {
+  string queue_url = 1;
+}
