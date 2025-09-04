@@ -25,9 +25,10 @@ const (
 type IntegrationKind int32
 
 const (
-	IntegrationKind_LAMBDA IntegrationKind = 0
-	IntegrationKind_REST   IntegrationKind = 1
-	IntegrationKind_SQS    IntegrationKind = 2
+	IntegrationKind_LAMBDA       IntegrationKind = 0
+	IntegrationKind_REST         IntegrationKind = 1
+	IntegrationKind_SQS          IntegrationKind = 2
+	IntegrationKind_LAMBDA_PROXY IntegrationKind = 3
 )
 
 // Enum value maps for IntegrationKind.
@@ -36,11 +37,13 @@ var (
 		0: "LAMBDA",
 		1: "REST",
 		2: "SQS",
+		3: "LAMBDA_PROXY",
 	}
 	IntegrationKind_value = map[string]int32{
-		"LAMBDA": 0,
-		"REST":   1,
-		"SQS":    2,
+		"LAMBDA":       0,
+		"REST":         1,
+		"SQS":          2,
+		"LAMBDA_PROXY": 3,
 	}
 )
 
@@ -363,12 +366,13 @@ const file_google_protobuf_service_options_proto_rawDesc = "" +
 	"\x0eSqsIntegration\x12\"\n" +
 	"\rkey_queue_url\x18\x01 \x01(\tR\vkeyQueueUrl\x12\x1b\n" +
 	"\x06region\x18\x02 \x01(\tH\x00R\x06region\x88\x01\x01B\t\n" +
-	"\a_region*0\n" +
+	"\a_region*B\n" +
 	"\x0fIntegrationKind\x12\n" +
 	"\n" +
 	"\x06LAMBDA\x10\x00\x12\b\n" +
 	"\x04REST\x10\x01\x12\a\n" +
-	"\x03SQS\x10\x02:c\n" +
+	"\x03SQS\x10\x02\x12\x10\n" +
+	"\fLAMBDA_PROXY\x10\x03:c\n" +
 	"\vintegration\x12\x1f.google.protobuf.ServiceOptions\x18\xb1\xea\x01 \x03(\v2\x1e.tecmise.protocols.IntegrationR\vintegrationB9Z7google.golang.org/protobuf/types/known/serviceoptionspbb\x06proto3"
 
 var (

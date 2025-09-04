@@ -23,6 +23,7 @@ enum IntegrationKind {
   LAMBDA = 0;
   REST = 1;
   SQS = 2;
+  LAMBDA_PROXY = 3;
 }
 
 message LambdaIntegration {
