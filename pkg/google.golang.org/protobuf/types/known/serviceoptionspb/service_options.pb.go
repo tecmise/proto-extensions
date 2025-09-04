@@ -22,16 +22,172 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type LambdaIntegration struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FunctionName  string                 `protobuf:"bytes,1,opt,name=function_name,json=functionName,proto3" json:"function_name,omitempty"`
+type IntegrationKind int32
+
+const (
+	IntegrationKind_LAMBDA IntegrationKind = 0
+	IntegrationKind_REST   IntegrationKind = 1
+	IntegrationKind_SQS    IntegrationKind = 2
+)
+
+// Enum value maps for IntegrationKind.
+var (
+	IntegrationKind_name = map[int32]string{
+		0: "LAMBDA",
+		1: "REST",
+		2: "SQS",
+	}
+	IntegrationKind_value = map[string]int32{
+		"LAMBDA": 0,
+		"REST":   1,
+		"SQS":    2,
+	}
+)
+
+func (x IntegrationKind) Enum() *IntegrationKind {
+	p := new(IntegrationKind)
+	*p = x
+	return p
+}
+
+func (x IntegrationKind) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (IntegrationKind) Descriptor() protoreflect.EnumDescriptor {
+	return file_google_protobuf_service_options_proto_enumTypes[0].Descriptor()
+}
+
+func (IntegrationKind) Type() protoreflect.EnumType {
+	return &file_google_protobuf_service_options_proto_enumTypes[0]
+}
+
+func (x IntegrationKind) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use IntegrationKind.Descriptor instead.
+func (IntegrationKind) EnumDescriptor() ([]byte, []int) {
+	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{0}
+}
+
+type Integration struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Kind  IntegrationKind        `protobuf:"varint,1,opt,name=kind,proto3,enum=tecmise.protocols.IntegrationKind" json:"kind,omitempty"`
+	// Types that are valid to be assigned to Integration:
+	//
+	//	*Integration_Lambda
+	//	*Integration_Rest
+	//	*Integration_Sqs
+	Integration   isIntegration_Integration `protobuf_oneof:"integration"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *Integration) Reset() {
+	*x = Integration{}
+	mi := &file_google_protobuf_service_options_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Integration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Integration) ProtoMessage() {}
+
+func (x *Integration) ProtoReflect() protoreflect.Message {
+	mi := &file_google_protobuf_service_options_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Integration.ProtoReflect.Descriptor instead.
+func (*Integration) Descriptor() ([]byte, []int) {
+	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Integration) GetKind() IntegrationKind {
+	if x != nil {
+		return x.Kind
+	}
+	return IntegrationKind_LAMBDA
+}
+
+func (x *Integration) GetIntegration() isIntegration_Integration {
+	if x != nil {
+		return x.Integration
+	}
+	return nil
+}
+
+func (x *Integration) GetLambda() *LambdaIntegration {
+	if x != nil {
+		if x, ok := x.Integration.(*Integration_Lambda); ok {
+			return x.Lambda
+		}
+	}
+	return nil
+}
+
+func (x *Integration) GetRest() *RestIntegration {
+	if x != nil {
+		if x, ok := x.Integration.(*Integration_Rest); ok {
+			return x.Rest
+		}
+	}
+	return nil
+}
+
+func (x *Integration) GetSqs() *SqsIntegration {
+	if x != nil {
+		if x, ok := x.Integration.(*Integration_Sqs); ok {
+			return x.Sqs
+		}
+	}
+	return nil
+}
+
+type isIntegration_Integration interface {
+	isIntegration_Integration()
+}
+
+type Integration_Lambda struct {
+	Lambda *LambdaIntegration `protobuf:"bytes,2,opt,name=lambda,proto3,oneof"`
+}
+
+type Integration_Rest struct {
+	Rest *RestIntegration `protobuf:"bytes,3,opt,name=rest,proto3,oneof"`
+}
+
+type Integration_Sqs struct {
+	Sqs *SqsIntegration `protobuf:"bytes,4,opt,name=sqs,proto3,oneof"`
+}
+
+func (*Integration_Lambda) isIntegration_Integration() {}
+
+func (*Integration_Rest) isIntegration_Integration() {}
+
+func (*Integration_Sqs) isIntegration_Integration() {}
+
+type LambdaIntegration struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	KeyFunctionName string                 `protobuf:"bytes,1,opt,name=key_function_name,json=keyFunctionName,proto3" json:"key_function_name,omitempty"`
+	Region          *string                `protobuf:"bytes,2,opt,name=region,proto3,oneof" json:"region,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
 func (x *LambdaIntegration) Reset() {
 	*x = LambdaIntegration{}
-	mi := &file_google_protobuf_service_options_proto_msgTypes[0]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +199,7 @@ func (x *LambdaIntegration) String() string {
 func (*LambdaIntegration) ProtoMessage() {}
 
 func (x *LambdaIntegration) ProtoReflect() protoreflect.Message {
-	mi := &file_google_protobuf_service_options_proto_msgTypes[0]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,26 +212,33 @@ func (x *LambdaIntegration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LambdaIntegration.ProtoReflect.Descriptor instead.
 func (*LambdaIntegration) Descriptor() ([]byte, []int) {
-	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{0}
+	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *LambdaIntegration) GetFunctionName() string {
+func (x *LambdaIntegration) GetKeyFunctionName() string {
 	if x != nil {
-		return x.FunctionName
+		return x.KeyFunctionName
+	}
+	return ""
+}
+
+func (x *LambdaIntegration) GetRegion() string {
+	if x != nil && x.Region != nil {
+		return *x.Region
 	}
 	return ""
 }
 
 type RestIntegration struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
+	KeyDomain     string                 `protobuf:"bytes,1,opt,name=key_domain,json=keyDomain,proto3" json:"key_domain,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RestIntegration) Reset() {
 	*x = RestIntegration{}
-	mi := &file_google_protobuf_service_options_proto_msgTypes[1]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +250,7 @@ func (x *RestIntegration) String() string {
 func (*RestIntegration) ProtoMessage() {}
 
 func (x *RestIntegration) ProtoReflect() protoreflect.Message {
-	mi := &file_google_protobuf_service_options_proto_msgTypes[1]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,26 +263,27 @@ func (x *RestIntegration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestIntegration.ProtoReflect.Descriptor instead.
 func (*RestIntegration) Descriptor() ([]byte, []int) {
-	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{1}
+	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RestIntegration) GetPath() string {
+func (x *RestIntegration) GetKeyDomain() string {
 	if x != nil {
-		return x.Path
+		return x.KeyDomain
 	}
 	return ""
 }
 
 type SqsIntegration struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	QueueUrl      string                 `protobuf:"bytes,1,opt,name=queue_url,json=queueUrl,proto3" json:"queue_url,omitempty"`
+	KeyQueueUrl   string                 `protobuf:"bytes,1,opt,name=key_queue_url,json=keyQueueUrl,proto3" json:"key_queue_url,omitempty"`
+	Region        *string                `protobuf:"bytes,2,opt,name=region,proto3,oneof" json:"region,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SqsIntegration) Reset() {
 	*x = SqsIntegration{}
-	mi := &file_google_protobuf_service_options_proto_msgTypes[2]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +295,7 @@ func (x *SqsIntegration) String() string {
 func (*SqsIntegration) ProtoMessage() {}
 
 func (x *SqsIntegration) ProtoReflect() protoreflect.Message {
-	mi := &file_google_protobuf_service_options_proto_msgTypes[2]
+	mi := &file_google_protobuf_service_options_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,12 +308,19 @@ func (x *SqsIntegration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SqsIntegration.ProtoReflect.Descriptor instead.
 func (*SqsIntegration) Descriptor() ([]byte, []int) {
-	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{2}
+	return file_google_protobuf_service_options_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SqsIntegration) GetQueueUrl() string {
+func (x *SqsIntegration) GetKeyQueueUrl() string {
 	if x != nil {
-		return x.QueueUrl
+		return x.KeyQueueUrl
+	}
+	return ""
+}
+
+func (x *SqsIntegration) GetRegion() string {
+	if x != nil && x.Region != nil {
+		return *x.Region
 	}
 	return ""
 }
@@ -157,56 +328,48 @@ func (x *SqsIntegration) GetQueueUrl() string {
 var file_google_protobuf_service_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
-		ExtensionType: (*LambdaIntegration)(nil),
-		Field:         40001,
-		Name:          "google.api.lambda_integration",
-		Tag:           "bytes,40001,opt,name=lambda_integration",
-		Filename:      "google/protobuf/service_options.proto",
-	},
-	{
-		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
-		ExtensionType: (*RestIntegration)(nil),
-		Field:         40002,
-		Name:          "google.api.rest_integration",
-		Tag:           "bytes,40002,opt,name=rest_integration",
-		Filename:      "google/protobuf/service_options.proto",
-	},
-	{
-		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
-		ExtensionType: (*SqsIntegration)(nil),
-		Field:         40003,
-		Name:          "google.api.sqs_integration",
-		Tag:           "bytes,40003,opt,name=sqs_integration",
+		ExtensionType: ([]*Integration)(nil),
+		Field:         30001,
+		Name:          "tecmise.protocols.integration",
+		Tag:           "bytes,30001,rep,name=integration",
 		Filename:      "google/protobuf/service_options.proto",
 	},
 }
 
 // Extension fields to descriptorpb.ServiceOptions.
 var (
-	// optional google.api.LambdaIntegration lambda_integration = 40001;
-	E_LambdaIntegration = &file_google_protobuf_service_options_proto_extTypes[0]
-	// optional google.api.RestIntegration rest_integration = 40002;
-	E_RestIntegration = &file_google_protobuf_service_options_proto_extTypes[1]
-	// optional google.api.SqsIntegration sqs_integration = 40003;
-	E_SqsIntegration = &file_google_protobuf_service_options_proto_extTypes[2]
+	// repeated tecmise.protocols.Integration integration = 30001;
+	E_Integration = &file_google_protobuf_service_options_proto_extTypes[0]
 )
 
 var File_google_protobuf_service_options_proto protoreflect.FileDescriptor
 
 const file_google_protobuf_service_options_proto_rawDesc = "" +
 	"\n" +
-	"%google/protobuf/service_options.proto\x12\n" +
-	"google.api\x1a google/protobuf/descriptor.proto\"8\n" +
-	"\x11LambdaIntegration\x12#\n" +
-	"\rfunction_name\x18\x01 \x01(\tR\ffunctionName\"%\n" +
-	"\x0fRestIntegration\x12\x12\n" +
-	"\x04path\x18\x01 \x01(\tR\x04path\"-\n" +
-	"\x0eSqsIntegration\x12\x1b\n" +
-	"\tqueue_url\x18\x01 \x01(\tR\bqueueUrl:r\n" +
-	"\x12lambda_integration\x12\x1f.google.protobuf.ServiceOptions\x18\xc1\xb8\x02 \x01(\v2\x1d.google.api.LambdaIntegrationR\x11lambdaIntegration\x88\x01\x01:l\n" +
-	"\x10rest_integration\x12\x1f.google.protobuf.ServiceOptions\x18¸\x02 \x01(\v2\x1b.google.api.RestIntegrationR\x0frestIntegration\x88\x01\x01:i\n" +
-	"\x0fsqs_integration\x12\x1f.google.protobuf.ServiceOptions\x18ø\x02 \x01(\v2\x1a.google.api.SqsIntegrationR\x0esqsIntegration\x88\x01\x01Bd\n" +
-	"\x0ecom.google.apiB\x10AnnotationsProtoP\x01Z7google.golang.org/protobuf/types/known/serviceoptionspb\xa2\x02\x04GAPIb\x06proto3"
+	"%google/protobuf/service_options.proto\x12\x11tecmise.protocols\x1a google/protobuf/descriptor.proto\"\x85\x02\n" +
+	"\vIntegration\x126\n" +
+	"\x04kind\x18\x01 \x01(\x0e2\".tecmise.protocols.IntegrationKindR\x04kind\x12>\n" +
+	"\x06lambda\x18\x02 \x01(\v2$.tecmise.protocols.LambdaIntegrationH\x00R\x06lambda\x128\n" +
+	"\x04rest\x18\x03 \x01(\v2\".tecmise.protocols.RestIntegrationH\x00R\x04rest\x125\n" +
+	"\x03sqs\x18\x04 \x01(\v2!.tecmise.protocols.SqsIntegrationH\x00R\x03sqsB\r\n" +
+	"\vintegration\"g\n" +
+	"\x11LambdaIntegration\x12*\n" +
+	"\x11key_function_name\x18\x01 \x01(\tR\x0fkeyFunctionName\x12\x1b\n" +
+	"\x06region\x18\x02 \x01(\tH\x00R\x06region\x88\x01\x01B\t\n" +
+	"\a_region\"0\n" +
+	"\x0fRestIntegration\x12\x1d\n" +
+	"\n" +
+	"key_domain\x18\x01 \x01(\tR\tkeyDomain\"\\\n" +
+	"\x0eSqsIntegration\x12\"\n" +
+	"\rkey_queue_url\x18\x01 \x01(\tR\vkeyQueueUrl\x12\x1b\n" +
+	"\x06region\x18\x02 \x01(\tH\x00R\x06region\x88\x01\x01B\t\n" +
+	"\a_region*0\n" +
+	"\x0fIntegrationKind\x12\n" +
+	"\n" +
+	"\x06LAMBDA\x10\x00\x12\b\n" +
+	"\x04REST\x10\x01\x12\a\n" +
+	"\x03SQS\x10\x02:c\n" +
+	"\vintegration\x12\x1f.google.protobuf.ServiceOptions\x18\xb1\xea\x01 \x03(\v2\x1e.tecmise.protocols.IntegrationR\vintegrationB9Z7google.golang.org/protobuf/types/known/serviceoptionspbb\x06proto3"
 
 var (
 	file_google_protobuf_service_options_proto_rawDescOnce sync.Once
@@ -220,25 +383,28 @@ func file_google_protobuf_service_options_proto_rawDescGZIP() []byte {
 	return file_google_protobuf_service_options_proto_rawDescData
 }
 
-var file_google_protobuf_service_options_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_google_protobuf_service_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_google_protobuf_service_options_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_google_protobuf_service_options_proto_goTypes = []any{
-	(*LambdaIntegration)(nil),           // 0: google.api.LambdaIntegration
-	(*RestIntegration)(nil),             // 1: google.api.RestIntegration
-	(*SqsIntegration)(nil),              // 2: google.api.SqsIntegration
-	(*descriptorpb.ServiceOptions)(nil), // 3: google.protobuf.ServiceOptions
+	(IntegrationKind)(0),                // 0: tecmise.protocols.IntegrationKind
+	(*Integration)(nil),                 // 1: tecmise.protocols.Integration
+	(*LambdaIntegration)(nil),           // 2: tecmise.protocols.LambdaIntegration
+	(*RestIntegration)(nil),             // 3: tecmise.protocols.RestIntegration
+	(*SqsIntegration)(nil),              // 4: tecmise.protocols.SqsIntegration
+	(*descriptorpb.ServiceOptions)(nil), // 5: google.protobuf.ServiceOptions
 }
 var file_google_protobuf_service_options_proto_depIdxs = []int32{
-	3, // 0: google.api.lambda_integration:extendee -> google.protobuf.ServiceOptions
-	3, // 1: google.api.rest_integration:extendee -> google.protobuf.ServiceOptions
-	3, // 2: google.api.sqs_integration:extendee -> google.protobuf.ServiceOptions
-	0, // 3: google.api.lambda_integration:type_name -> google.api.LambdaIntegration
-	1, // 4: google.api.rest_integration:type_name -> google.api.RestIntegration
-	2, // 5: google.api.sqs_integration:type_name -> google.api.SqsIntegration
+	0, // 0: tecmise.protocols.Integration.kind:type_name -> tecmise.protocols.IntegrationKind
+	2, // 1: tecmise.protocols.Integration.lambda:type_name -> tecmise.protocols.LambdaIntegration
+	3, // 2: tecmise.protocols.Integration.rest:type_name -> tecmise.protocols.RestIntegration
+	4, // 3: tecmise.protocols.Integration.sqs:type_name -> tecmise.protocols.SqsIntegration
+	5, // 4: tecmise.protocols.integration:extendee -> google.protobuf.ServiceOptions
+	1, // 5: tecmise.protocols.integration:type_name -> tecmise.protocols.Integration
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
-	3, // [3:6] is the sub-list for extension type_name
-	0, // [0:3] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	5, // [5:6] is the sub-list for extension type_name
+	4, // [4:5] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_google_protobuf_service_options_proto_init() }
@@ -246,18 +412,26 @@ func file_google_protobuf_service_options_proto_init() {
 	if File_google_protobuf_service_options_proto != nil {
 		return
 	}
+	file_google_protobuf_service_options_proto_msgTypes[0].OneofWrappers = []any{
+		(*Integration_Lambda)(nil),
+		(*Integration_Rest)(nil),
+		(*Integration_Sqs)(nil),
+	}
+	file_google_protobuf_service_options_proto_msgTypes[1].OneofWrappers = []any{}
+	file_google_protobuf_service_options_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_google_protobuf_service_options_proto_rawDesc), len(file_google_protobuf_service_options_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
-			NumExtensions: 3,
+			NumEnums:      1,
+			NumMessages:   4,
+			NumExtensions: 1,
 			NumServices:   0,
 		},
 		GoTypes:           file_google_protobuf_service_options_proto_goTypes,
 		DependencyIndexes: file_google_protobuf_service_options_proto_depIdxs,
+		EnumInfos:         file_google_protobuf_service_options_proto_enumTypes,
 		MessageInfos:      file_google_protobuf_service_options_proto_msgTypes,
 		ExtensionInfos:    file_google_protobuf_service_options_proto_extTypes,
 	}.Build()

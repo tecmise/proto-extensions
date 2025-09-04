@@ -22,11 +22,111 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ContextParameterKind int32
+
+const (
+	ContextParameterKind_HEADER ContextParameterKind = 0
+)
+
+// Enum value maps for ContextParameterKind.
+var (
+	ContextParameterKind_name = map[int32]string{
+		0: "HEADER",
+	}
+	ContextParameterKind_value = map[string]int32{
+		"HEADER": 0,
+	}
+)
+
+func (x ContextParameterKind) Enum() *ContextParameterKind {
+	p := new(ContextParameterKind)
+	*p = x
+	return p
+}
+
+func (x ContextParameterKind) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ContextParameterKind) Descriptor() protoreflect.EnumDescriptor {
+	return file_google_protobuf_method_options_proto_enumTypes[0].Descriptor()
+}
+
+func (ContextParameterKind) Type() protoreflect.EnumType {
+	return &file_google_protobuf_method_options_proto_enumTypes[0]
+}
+
+func (x ContextParameterKind) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ContextParameterKind.Descriptor instead.
+func (ContextParameterKind) EnumDescriptor() ([]byte, []int) {
+	return file_google_protobuf_method_options_proto_rawDescGZIP(), []int{0}
+}
+
+type HttpMethod int32
+
+const (
+	HttpMethod_GET    HttpMethod = 0
+	HttpMethod_POST   HttpMethod = 1
+	HttpMethod_PUT    HttpMethod = 2
+	HttpMethod_DELETE HttpMethod = 3
+	HttpMethod_PATCH  HttpMethod = 4
+)
+
+// Enum value maps for HttpMethod.
+var (
+	HttpMethod_name = map[int32]string{
+		0: "GET",
+		1: "POST",
+		2: "PUT",
+		3: "DELETE",
+		4: "PATCH",
+	}
+	HttpMethod_value = map[string]int32{
+		"GET":    0,
+		"POST":   1,
+		"PUT":    2,
+		"DELETE": 3,
+		"PATCH":  4,
+	}
+)
+
+func (x HttpMethod) Enum() *HttpMethod {
+	p := new(HttpMethod)
+	*p = x
+	return p
+}
+
+func (x HttpMethod) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (HttpMethod) Descriptor() protoreflect.EnumDescriptor {
+	return file_google_protobuf_method_options_proto_enumTypes[1].Descriptor()
+}
+
+func (HttpMethod) Type() protoreflect.EnumType {
+	return &file_google_protobuf_method_options_proto_enumTypes[1]
+}
+
+func (x HttpMethod) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use HttpMethod.Descriptor instead.
+func (HttpMethod) EnumDescriptor() ([]byte, []int) {
+	return file_google_protobuf_method_options_proto_rawDescGZIP(), []int{1}
+}
+
 type HttpIntegration struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Method        string                 `protobuf:"bytes,1,opt,name=method,proto3" json:"method,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Method             HttpMethod             `protobuf:"varint,1,opt,name=method,proto3,enum=tecmise.protocols.HttpMethod" json:"method,omitempty"`
+	Path               string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
+	DisableCredentials *bool                  `protobuf:"varint,3,opt,name=disable_credentials,json=disableCredentials,proto3,oneof" json:"disable_credentials,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *HttpIntegration) Reset() {
@@ -59,11 +159,25 @@ func (*HttpIntegration) Descriptor() ([]byte, []int) {
 	return file_google_protobuf_method_options_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *HttpIntegration) GetMethod() string {
+func (x *HttpIntegration) GetMethod() HttpMethod {
 	if x != nil {
 		return x.Method
 	}
+	return HttpMethod_GET
+}
+
+func (x *HttpIntegration) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
 	return ""
+}
+
+func (x *HttpIntegration) GetDisableCredentials() bool {
+	if x != nil && x.DisableCredentials != nil {
+		return *x.DisableCredentials
+	}
+	return false
 }
 
 var file_google_protobuf_method_options_proto_extTypes = []protoimpl.ExtensionInfo{
@@ -87,9 +201,23 @@ var File_google_protobuf_method_options_proto protoreflect.FileDescriptor
 
 const file_google_protobuf_method_options_proto_rawDesc = "" +
 	"\n" +
-	"$google/protobuf/method_options.proto\x12\x11tecmise.protocols\x1a google/protobuf/descriptor.proto\")\n" +
-	"\x0fHttpIntegration\x12\x16\n" +
-	"\x06method\x18\x01 \x01(\tR\x06method:X\n" +
+	"$google/protobuf/method_options.proto\x12\x11tecmise.protocols\x1a google/protobuf/descriptor.proto\"\xaa\x01\n" +
+	"\x0fHttpIntegration\x125\n" +
+	"\x06method\x18\x01 \x01(\x0e2\x1d.tecmise.protocols.HttpMethodR\x06method\x12\x12\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path\x124\n" +
+	"\x13disable_credentials\x18\x03 \x01(\bH\x00R\x12disableCredentials\x88\x01\x01B\x16\n" +
+	"\x14_disable_credentials*\"\n" +
+	"\x14ContextParameterKind\x12\n" +
+	"\n" +
+	"\x06HEADER\x10\x00*?\n" +
+	"\n" +
+	"HttpMethod\x12\a\n" +
+	"\x03GET\x10\x00\x12\b\n" +
+	"\x04POST\x10\x01\x12\a\n" +
+	"\x03PUT\x10\x02\x12\n" +
+	"\n" +
+	"\x06DELETE\x10\x03\x12\t\n" +
+	"\x05PATCH\x10\x04:X\n" +
 	"\x04http\x12\x1e.google.protobuf.MethodOptions\x18\xc1\xb8\x02 \x01(\v2\".tecmise.protocols.HttpIntegrationR\x04httpB8Z6google.golang.org/protobuf/types/known/methodoptionspbb\x06proto3"
 
 var (
@@ -104,19 +232,23 @@ func file_google_protobuf_method_options_proto_rawDescGZIP() []byte {
 	return file_google_protobuf_method_options_proto_rawDescData
 }
 
+var file_google_protobuf_method_options_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_google_protobuf_method_options_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_google_protobuf_method_options_proto_goTypes = []any{
-	(*HttpIntegration)(nil),            // 0: tecmise.protocols.HttpIntegration
-	(*descriptorpb.MethodOptions)(nil), // 1: google.protobuf.MethodOptions
+	(ContextParameterKind)(0),          // 0: tecmise.protocols.ContextParameterKind
+	(HttpMethod)(0),                    // 1: tecmise.protocols.HttpMethod
+	(*HttpIntegration)(nil),            // 2: tecmise.protocols.HttpIntegration
+	(*descriptorpb.MethodOptions)(nil), // 3: google.protobuf.MethodOptions
 }
 var file_google_protobuf_method_options_proto_depIdxs = []int32{
-	1, // 0: tecmise.protocols.http:extendee -> google.protobuf.MethodOptions
-	0, // 1: tecmise.protocols.http:type_name -> tecmise.protocols.HttpIntegration
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	1, // [1:2] is the sub-list for extension type_name
-	0, // [0:1] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: tecmise.protocols.HttpIntegration.method:type_name -> tecmise.protocols.HttpMethod
+	3, // 1: tecmise.protocols.http:extendee -> google.protobuf.MethodOptions
+	2, // 2: tecmise.protocols.http:type_name -> tecmise.protocols.HttpIntegration
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	2, // [2:3] is the sub-list for extension type_name
+	1, // [1:2] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_google_protobuf_method_options_proto_init() }
@@ -124,18 +256,20 @@ func file_google_protobuf_method_options_proto_init() {
 	if File_google_protobuf_method_options_proto != nil {
 		return
 	}
+	file_google_protobuf_method_options_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_google_protobuf_method_options_proto_rawDesc), len(file_google_protobuf_method_options_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      2,
 			NumMessages:   1,
 			NumExtensions: 1,
 			NumServices:   0,
 		},
 		GoTypes:           file_google_protobuf_method_options_proto_goTypes,
 		DependencyIndexes: file_google_protobuf_method_options_proto_depIdxs,
+		EnumInfos:         file_google_protobuf_method_options_proto_enumTypes,
 		MessageInfos:      file_google_protobuf_method_options_proto_msgTypes,
 		ExtensionInfos:    file_google_protobuf_method_options_proto_extTypes,
 	}.Build()

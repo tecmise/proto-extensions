@@ -26,7 +26,7 @@ var file_google_protobuf_field_options_proto_extTypes = []protoimpl.ExtensionInf
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*string)(nil),
 		Field:         50001,
-		Name:          "google.protobuf.json_name",
+		Name:          "tecmise.protocols.json_name",
 		Tag:           "bytes,50001,opt,name=json_name",
 		Filename:      "google/protobuf/field_options.proto",
 	},
@@ -34,7 +34,7 @@ var file_google_protobuf_field_options_proto_extTypes = []protoimpl.ExtensionInf
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*bool)(nil),
 		Field:         50002,
-		Name:          "google.protobuf.omitempty",
+		Name:          "tecmise.protocols.omitempty",
 		Tag:           "varint,50002,opt,name=omitempty",
 		Filename:      "google/protobuf/field_options.proto",
 	},
@@ -42,7 +42,7 @@ var file_google_protobuf_field_options_proto_extTypes = []protoimpl.ExtensionInf
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: ([]string)(nil),
 		Field:         50003,
-		Name:          "google.protobuf.validate",
+		Name:          "tecmise.protocols.validate",
 		Tag:           "bytes,50003,rep,name=validate",
 		Filename:      "google/protobuf/field_options.proto",
 	},
@@ -50,7 +50,7 @@ var file_google_protobuf_field_options_proto_extTypes = []protoimpl.ExtensionInf
 		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
 		ExtensionType: (*string)(nil),
 		Field:         50004,
-		Name:          "google.protobuf.description",
+		Name:          "tecmise.protocols.description",
 		Tag:           "bytes,50004,opt,name=description",
 		Filename:      "google/protobuf/field_options.proto",
 	},
@@ -72,7 +72,7 @@ var File_google_protobuf_field_options_proto protoreflect.FileDescriptor
 
 const file_google_protobuf_field_options_proto_rawDesc = "" +
 	"\n" +
-	"#google/protobuf/field_options.proto\x12\x0fgoogle.protobuf\x1a google/protobuf/descriptor.proto:?\n" +
+	"#google/protobuf/field_options.proto\x12\x11tecmise.protocols\x1a google/protobuf/descriptor.proto:?\n" +
 	"\tjson_name\x12\x1d.google.protobuf.FieldOptions\x18ц\x03 \x01(\tR\bjsonName\x88\x01\x01:=\n" +
 	"\tomitempty\x12\x1d.google.protobuf.FieldOptions\x18҆\x03 \x01(\bR\tomitempty:;\n" +
 	"\bvalidate\x12\x1d.google.protobuf.FieldOptions\x18ӆ\x03 \x03(\tR\bvalidate:D\n" +
@@ -82,10 +82,10 @@ var file_google_protobuf_field_options_proto_goTypes = []any{
 	(*descriptorpb.FieldOptions)(nil), // 0: google.protobuf.FieldOptions
 }
 var file_google_protobuf_field_options_proto_depIdxs = []int32{
-	0, // 0: google.protobuf.json_name:extendee -> google.protobuf.FieldOptions
-	0, // 1: google.protobuf.omitempty:extendee -> google.protobuf.FieldOptions
-	0, // 2: google.protobuf.validate:extendee -> google.protobuf.FieldOptions
-	0, // 3: google.protobuf.description:extendee -> google.protobuf.FieldOptions
+	0, // 0: tecmise.protocols.json_name:extendee -> google.protobuf.FieldOptions
+	0, // 1: tecmise.protocols.omitempty:extendee -> google.protobuf.FieldOptions
+	0, // 2: tecmise.protocols.validate:extendee -> google.protobuf.FieldOptions
+	0, // 3: tecmise.protocols.description:extendee -> google.protobuf.FieldOptions
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

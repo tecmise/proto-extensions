@@ -10,5 +10,19 @@ extend google.protobuf.MethodOptions {
 }
 
 message HttpIntegration {
-  string method = 1;
+  HttpMethod method = 1;
+  string path = 2;
+  optional bool disable_credentials = 3;
+}
+
+enum ContextParameterKind {
+  HEADER = 0;
+}
+
+enum HttpMethod {
+  GET = 0;
+  POST = 1;
+  PUT = 2;
+  DELETE = 3;
+  PATCH = 4;
 }

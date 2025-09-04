@@ -27,6 +27,7 @@ enum IntegrationKind {
 
 message LambdaIntegration {
   string key_function_name = 1;
+  optional string region = 2;
 }
 
 message RestIntegration {
@@ -35,4 +36,5 @@ message RestIntegration {
 
 message SqsIntegration {
   string key_queue_url = 1;
+  optional string region = 2;
 }
