@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package google.protobuf;
+package tecmise.protocols;
 
 import "google/protobuf/descriptor.proto";
 option go_package = "google.golang.org/protobuf/types/known/fieldoptionspb";
