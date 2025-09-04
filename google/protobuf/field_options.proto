@@ -3,6 +3,7 @@ syntax = "proto3";
 package google.protobuf;
 
 import "google/protobuf/descriptor.proto";
+option go_package = "google.golang.org/protobuf/types/known/fieldoptionspb";
 
 extend google.protobuf.FieldOptions {
   optional string json_name = 50001;
