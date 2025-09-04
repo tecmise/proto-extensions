@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package google.protobuf;
+
+import "google/protobuf/descriptor.proto";
+
+// Define uma extensão para validação
+extend google.protobuf.FieldOptions {
+  // Nome customizado para o campo JSON
+  string json_name = 50001;
+
+  // Indica se o campo deve ser omitido no JSON se estiver vazio
+  bool omitempty = 50002;
+
+  // Regras de validação para o campo
+  string validate = 50003;
+
+  // Descrição do campo (útil para documentação)
+  string description = 50004;
+
+  // Valor de exemplo para o campo
+  string example = 50005;
+}
