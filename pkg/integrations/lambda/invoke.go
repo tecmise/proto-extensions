@@ -115,7 +115,7 @@ func (c *ProtocolClient[T, R]) invoke(
 
 	if resp.FunctionError != nil {
 		logrus.Errorf("Erro na função Lambda: %s", aws.ToString(resp.FunctionError))
-		return InvokeOutputResult{
+		return InvokeOutputResult[R]{
 			output: nil,
 			error:  err,
 		}
@@ -124,7 +124,7 @@ func (c *ProtocolClient[T, R]) invoke(
 	logrus.Debugf("Lambda response status code: %d", resp.StatusCode)
 	logrus.Debugf("Lambda response payload: %s", string(resp.Payload))
 
-	return InvokeOutputResult{
+	return InvokeOutputResult[R]{
 		output: resp,
 		error:  nil,
 	}
