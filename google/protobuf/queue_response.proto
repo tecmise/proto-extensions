@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package tecmise.protocols;
+
+import "google/protobuf/descriptor.proto";
+option go_package = "google.golang.org/protobuf/types/known/queueresponsepb";
+option java_package = "com.tecmise.connector.ports.output.shared_kernel";
+
+message QueueTriggerResponse {
+  string message_id = 1;
+}
