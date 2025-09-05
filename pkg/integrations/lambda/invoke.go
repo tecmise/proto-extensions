@@ -11,34 +11,34 @@ import (
 )
 
 type (
-	Client[T any, R any] struct {
+	ProtocolClient[T any, R any] struct {
 		host   string
 		path   string
 		client *lambda.Client
 	}
 )
 
-func (c *Client[T, R]) GET(ctx context.Context) InvokeOutputResult[R] {
+func (c *ProtocolClient[T, R]) GET(ctx context.Context) InvokeOutputResult[R] {
 	return c.invoke(ctx, nil, http.MethodGet)
 }
 
-func (c *Client[T, R]) POST(ctx context.Context, body *T) InvokeOutputResult[R] {
+func (c *ProtocolClient[T, R]) POST(ctx context.Context, body *T) InvokeOutputResult[R] {
 	return c.invoke(ctx, body, http.MethodPost)
 }
 
-func (c *Client[T, R]) PUT(ctx context.Context, body *T) InvokeOutputResult[R] {
+func (c *ProtocolClient[T, R]) PUT(ctx context.Context, body *T) InvokeOutputResult[R] {
 	return c.invoke(ctx, body, http.MethodPut)
 }
 
-func (c *Client[T, R]) PATCH(ctx context.Context, body *T) InvokeOutputResult[R] {
+func (c *ProtocolClient[T, R]) PATCH(ctx context.Context, body *T) InvokeOutputResult[R] {
 	return c.invoke(ctx, body, http.MethodPatch)
 }
 
-func (c *Client[T, R]) DELETE(ctx context.Context, body *T) InvokeOutputResult[R] {
+func (c *ProtocolClient[T, R]) DELETE(ctx context.Context, body *T) InvokeOutputResult[R] {
 	return c.invoke(ctx, body, http.MethodDelete)
 }
 
-func (c *Client[T, R]) invoke(
+func (c *ProtocolClient[T, R]) invoke(
 	ctx context.Context,
 	_body interface{},
 	method string,
