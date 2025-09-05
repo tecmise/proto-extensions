@@ -7,15 +7,15 @@ import "google/protobuf/descriptor.proto";
 option go_package = "google.golang.org/protobuf/types/known/serviceoptionspb";
 
 extend google.protobuf.ServiceOptions {
-  repeated Integration integration = 30001;
+  Integration integration = 30001;
 }
 
 message Integration {
     IntegrationKind kind = 1;
     oneof integration {
-        LambdaIntegration lambda = 2;
-        RestIntegration rest = 3;
-        SqsIntegration sqs = 4;
+      LambdaIntegration lambda = 2;
+      RestIntegration rest = 3;
+      SqsIntegration sqs = 4;
     }
 }
 
