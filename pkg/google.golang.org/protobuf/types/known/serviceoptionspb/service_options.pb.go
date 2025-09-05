@@ -331,17 +331,17 @@ func (x *SqsIntegration) GetRegion() string {
 var file_google_protobuf_service_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
 		ExtendedType:  (*descriptorpb.ServiceOptions)(nil),
-		ExtensionType: ([]*Integration)(nil),
+		ExtensionType: (*Integration)(nil),
 		Field:         30001,
 		Name:          "tecmise.protocols.integration",
-		Tag:           "bytes,30001,rep,name=integration",
+		Tag:           "bytes,30001,opt,name=integration",
 		Filename:      "google/protobuf/service_options.proto",
 	},
 }
 
 // Extension fields to descriptorpb.ServiceOptions.
 var (
-	// repeated tecmise.protocols.Integration integration = 30001;
+	// optional tecmise.protocols.Integration integration = 30001;
 	E_Integration = &file_google_protobuf_service_options_proto_extTypes[0]
 )
 
@@ -373,7 +373,7 @@ const file_google_protobuf_service_options_proto_rawDesc = "" +
 	"\x04REST\x10\x01\x12\a\n" +
 	"\x03SQS\x10\x02\x12\x10\n" +
 	"\fLAMBDA_PROXY\x10\x03:c\n" +
-	"\vintegration\x12\x1f.google.protobuf.ServiceOptions\x18\xb1\xea\x01 \x03(\v2\x1e.tecmise.protocols.IntegrationR\vintegrationB9Z7google.golang.org/protobuf/types/known/serviceoptionspbb\x06proto3"
+	"\vintegration\x12\x1f.google.protobuf.ServiceOptions\x18\xb1\xea\x01 \x01(\v2\x1e.tecmise.protocols.IntegrationR\vintegrationB9Z7google.golang.org/protobuf/types/known/serviceoptionspbb\x06proto3"
 
 var (
 	file_google_protobuf_service_options_proto_rawDescOnce sync.Once
