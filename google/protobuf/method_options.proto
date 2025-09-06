@@ -1,12 +1,17 @@
 syntax = "proto3";
 
-package tecmise.protocols;
+package tecmise.methods;
 
 import "google/protobuf/descriptor.proto";
-option go_package = "google.golang.org/protobuf/types/known/methodoptionspb";
+option go_package = "connector/options/method;method";
 
 extend google.protobuf.MethodOptions {
-  HttpIntegration http = 40001;
+  optional HttpIntegration http = 40001;
+  optional SqsIntegration sqs = 40002;
+}
+
+message SqsIntegration {
+  string queue_url = 1;
 }
 
 message HttpIntegration {
