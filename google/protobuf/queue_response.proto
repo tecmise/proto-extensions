@@ -3,7 +3,7 @@ syntax = "proto3";
 package tecmise.responses;
 
 import "google/protobuf/descriptor.proto";
-option go_package = "github.com/tecmise/connector-lib/pkg/ports/output/shared_kernel/queue_response;queue_response";
+option go_package = "github.com/tecmise/connector-lib/pkg/ports/output/assync";
 option java_package = "com.tecmise.connector.ports.output.shared_kernel";
 
 message QueueTriggerResponse {
